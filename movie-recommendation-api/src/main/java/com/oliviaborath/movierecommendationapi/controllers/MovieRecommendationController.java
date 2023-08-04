@@ -17,7 +17,7 @@ public class MovieRecommendationController {
     }
 
     @GetMapping("/api/recommendations")
-    public List<String> getRecommendations(
+    public List<String> getRecommendations( 
             @RequestParam List<String> userPreferences,
             @RequestParam(required = false) Boolean includeMovies,
             @RequestParam(required = false) Boolean includeTVShows
