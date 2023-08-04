@@ -1,0 +1,99 @@
+/* MovieForm.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 50px;
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  .input-group {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px; /* Add margin to separate each input section */
+  }
+  
+  .input-group .btn-primary {
+    background-color: lightpink;
+    color: black;
+    font-family: Calibri, sans-serif;
+    margin-bottom: 10px; /* Add margin to separate from the input field */
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+  }
+  
+  /* Hide the "Select Genre" and selected genre buttons */
+  /* .input-group .btn-primary:not(:last-child) {
+    display: none;
+  } */
+  
+  /* Show the selected genre button when a genre is selected */
+  .input-group .btn-primary:last-child {
+    display: block;
+  }
+  
+  .dropdown-menu {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .your-preference {
+    font-family: Calibri, sans-serif;
+    margin-top: 10px;
+  }
+  
+  .form-control {
+    margin-top: 10px;
+    border: none;
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 10px; /* Add margin to separate from the checkboxes */
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .form-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Add margin to separate checkboxes */
+  }
+  
+  .btn-primary[type="button"] {
+    background-color: lightpink;
+    color: black;
+    font-family: Calibri, sans-serif;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+  }
+  
+  .list-group {
+    width: 100%;
+    max-width: 600px; /* Enlarge the list-group width */
+    margin-top: 20px;
+    padding-left: 0;
+  }
+  
+  .list-group-item {
+    background-color: lightpink;
+    color: black;
+    font-family: Calibri, sans-serif;
+  }
+  
+  .text-muted {
+    font-family: Calibri, sans-serif;
+    margin-top: 10px;
+  }
+  

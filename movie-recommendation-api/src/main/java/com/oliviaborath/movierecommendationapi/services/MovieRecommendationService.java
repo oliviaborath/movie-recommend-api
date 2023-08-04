@@ -11,4 +11,6 @@ public interface MovieRecommendationService {
      * @return A list of recommended movie titles.
      */
     List<String> getRecommendations(List<String> userPreferences);
+    public List<String> getTVShowRecommendations(List<String> userPreferences);
+    public List<String> getMovieRecommendations(List<String> userPreferences);
 }

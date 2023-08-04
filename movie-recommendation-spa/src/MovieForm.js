@@ -1,5 +1,7 @@
+// MovieForm.js
 import React, { useState, useEffect, useRef } from 'react';
 import { getRecommendations } from './api';
+import './MovieForm.css';
 
 const MovieForm = () => {
   const genres = [
@@ -11,29 +13,47 @@ const MovieForm = () => {
     'Sci-Fi',
     'Thriller',
     'Comedy',
+    'Biography',
+    'Mystery',
+    'Western',
+    'Music',
+    'Family',
+    'War',
+    'Horror',
+    'Sport',
+    'Film-Noir',
   ];
 
   const [selectedGenre, setSelectedGenre] = useState('');
   const [recommendations, setRecommendations] = useState([]);
+  const [includeMovies, setIncludeMovies] = useState(false);
+  const [includeTVShows, setIncludeTVShows] = useState(false);
   const dropdownRef = useRef(null);
 
   const handleGetRecommendations = async () => {
     try {
-      const response = await getRecommendations([selectedGenre]);
+      const response = await getRecommendations([selectedGenre], includeMovies, includeTVShows);
       setRecommendations(response);
     } catch (error) {
       // Handle the error here if needed
     }
   };
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const handleGenreSelect = (genre) => {
     setSelectedGenre(genre);
+    setIsDropdownOpen(false);
+  };
+
+  const handleToggleDropdown = () => {
+    setIsDropdownOpen((prevState) => !prevState);
   };
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        document.getElementById('genreDropdown').classList.remove('show');
+        setIsDropdownOpen(false);
       }
     };
 
@@ -45,29 +65,18 @@ const MovieForm = () => {
   }, []);
 
   return (
-    <div className="container mt-5">
-      <h1 className="mb-4">Movie Recommendations</h1>
-      <div className="input-group mb-3">
-        <div className="input-group-prepend">
-          {!selectedGenre && (
-            <button
-              className="btn btn-primary dropdown-toggle"
-              type="button"
-              onClick={() => document.getElementById('genreDropdown').classList.toggle('show')}
-            >
-              Select Genre
-            </button>
-          )}
-          {selectedGenre && (
-            <button
-              className="btn btn-primary dropdown-toggle"
-              type="button"
-              onClick={() => document.getElementById('genreDropdown').classList.toggle('show')}
-            >
-              {selectedGenre}
-            </button>
-          )}
-          <div className={`dropdown-menu ${selectedGenre ? 'show' : ''}`} id="genreDropdown" ref={dropdownRef}>
+    <div className="container">
+      <div className="input-group">
+        {/* Genre Dropdown */}
+        <div className="dropdown">
+          <button
+            className="btn btn-primary dropdown-toggle"
+            type="button"
+            onClick={handleToggleDropdown}
+          >
+            {selectedGenre ? selectedGenre : 'Select Genre'}
+          </button>
+          <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`} ref={dropdownRef}>
             {genres.map((genre) => (
               <button
                 key={genre}
@@ -80,6 +89,15 @@ const MovieForm = () => {
             ))}
           </div>
         </div>
+
+        {/* Your Preference */}
+        {selectedGenre && (
+          <div className="your-preference">
+            Your Preference: {selectedGenre}
+          </div>
+        )}
+
+        {/* Input field */}
         <input
           type="text"
           className="form-control"
@@ -87,13 +105,39 @@ const MovieForm = () => {
           onChange={(e) => setSelectedGenre(e.target.value)}
           placeholder="Enter your preferences (or use the dropdown)"
         />
-        <button className="btn btn-primary" onClick={handleGetRecommendations} type="button">
+
+        <div className="form-check form-check-inline mt-3">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="includeMovies"
+            checked={includeMovies}
+            onChange={() => setIncludeMovies(!includeMovies)}
+          />
+          <label className="form-check-label" htmlFor="includeMovies">
+            Include Movies
+          </label>
+        </div>
+
+        <div className="form-check form-check-inline mt-3">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="includeTVShows"
+            checked={includeTVShows}
+            onChange={() => setIncludeTVShows(!includeTVShows)}
+          />
+          <label className="form-check-label" htmlFor="includeTVShows">
+            Include TV Shows
+          </label>
+        </div>
+
+        <button className="btn btn-primary mt-3" onClick={handleGetRecommendations} type="button">
           Get Recommendations
         </button>
       </div>
 
-      {/* Display the movie recommendations */}
-      <ul className="list-group">
+      <ul className="list-group mt-3">
         {recommendations.map((movie, index) => (
           <li key={index} className="list-group-item">
             {movie}
@@ -101,7 +145,7 @@ const MovieForm = () => {
         ))}
       </ul>
 
-      <p className="mt-4 text-muted">Powered by Movie Recommendation API</p>
+      <p className="mt-4 text-muted">Powered by Olivia Munineath Borath</p>
     </div>
   );
 };
