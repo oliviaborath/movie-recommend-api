@@ -5,25 +5,25 @@ import './MovieForm.css';
 
 const MovieForm = () => {
   const genres = [
-    'Drama',
-    'Crime',
     'Action',
     'Adventure',
+    'Biography',
+    'Comedy',
+    'Crime',
+    'Drama',
+    'Family',
+    'Film-Noir',
+    'Horror',
+    'Music',
+    'Mystery',
     'Romance',
     'Sci-Fi',
-    'Thriller',
-    'Comedy',
-    'Biography',
-    'Mystery',
-    'Western',
-    'Music',
-    'Family',
-    'War',
-    'Horror',
     'Sport',
-    'Film-Noir',
+    'Thriller',
+    'War',
+    'Western',
   ];
-
+  
   const [selectedGenre, setSelectedGenre] = useState('');
   const [recommendations, setRecommendations] = useState([]);
   const [includeMovies, setIncludeMovies] = useState(false);
@@ -90,21 +90,6 @@ const MovieForm = () => {
           </div>
         </div>
 
-        {/* Your Preference */}
-        {selectedGenre && (
-          <div className="your-preference">
-            Your Preference: {selectedGenre}
-          </div>
-        )}
-
-        {/* Input field */}
-        <input
-          type="text"
-          className="form-control"
-          value={selectedGenre}
-          onChange={(e) => setSelectedGenre(e.target.value)}
-          placeholder="Enter your preferences (or use the dropdown)"
-        />
 
         <div className="form-check form-check-inline mt-3">
           <input
